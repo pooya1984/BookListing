@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         return bookList;
     }
 
-    //Async Task to perform the network request, get and parse the JSON response
+
     private class BookAsyncTask extends AsyncTask<String, Void, List<Book>> {
 
         @Override

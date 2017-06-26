@@ -1,8 +1,6 @@
 package com.example.android.booklisting;
 
-/**
- * Created by Sharareh on 6/26/2017.
- */
+
 
 public class Book {
 
