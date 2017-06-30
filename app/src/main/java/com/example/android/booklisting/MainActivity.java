@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     //Variable to log errors as they occur
     public static final String LOG_TAG = MainActivity.class.getName();
     //Google Books API URL
-    private static String GOOGLE_BOOKS_URL = "  https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1";
+    private static String GOOGLE_BOOKS_URL = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1";
     //Variable for the user inputs (text to search for and search button)
     private EditText editText;
     private Button searchButton;
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     //Variable for the ListView to populate
     private ListView listView;
 
-    private ArrayList<Book> bookArrayList;
     private BookListAdapter adapter;
 
     private String userInput;
@@ -47,15 +46,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_item);
+        setContentView(R.layout.activity_book);
 
         //Find the EditText and Button objects
         searchButton = (Button) findViewById(R.id.search_button);
 
         //Find the list_view
         listView = (ListView) findViewById(R.id.list);
-        bookArrayList = new ArrayList<Book>();
-        adapter = new BookListAdapter(this, bookArrayList);
+        adapter = new BookListAdapter(this, new ArrayList<Book>());
         listView.setAdapter(adapter);
 
 
