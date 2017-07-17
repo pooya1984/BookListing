@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     //Variable to log errors as they occur
     public static final String LOG_TAG = MainActivity.class.getName();
     //Google Books API URL
-    private static String GOOGLE_BOOKS_URL = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1";
+    private static String GOOGLE_BOOKS_URL = "https://www.googleapis.com/books/v1/volumes?q=";
     //Variable for the user inputs (text to search for and search button)
     private EditText editText;
     private Button searchButton;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private BookListAdapter adapter;
 
     private String userInput;
+
+    private TextView mEmptyBookListTextView;
 
 
     @Override
@@ -66,7 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 task.execute();
             }
         });
-    }
+
+        mEmptyBookListTextView = (TextView) findViewById(R.id.empty_view);
+        listView.setEmptyView(mEmptyBookListTextView);    }
+
 
     private void updateUi(List<Book> book) {
         adapter.clear();
@@ -74,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
     }
+
 
     //Create a URL from a string
     private URL createUrl(String stringUrl) {
@@ -140,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(bookJSON)) {
             return null;
         }
+
         try {
             JSONObject baseJsonObject = new JSONObject(bookJSON);
             JSONArray itemsArray = baseJsonObject.getJSONArray("items");
@@ -147,13 +155,16 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < itemsArray.length(); i++) {
                 JSONObject responseObject = itemsArray.getJSONObject(i);
                 JSONObject volumeInfo = responseObject.getJSONObject("volumeInfo");
-                String actualAuthor = "N/A";
+                String title = volumeInfo.getString("title");
+                String author;
                 if (volumeInfo.has("authors")) {
-                    JSONArray authorsArray = volumeInfo.getJSONArray("authors");
-                    actualAuthor = authorsArray.getString(0);
+                    author = volumeInfo.getJSONArray("authors").get(0).toString();
                 }
-                String bookTitle = volumeInfo.getString("title");
-                Book book = new Book(actualAuthor);
+                else {
+                    author = "Unknown author";
+                }
+                String title1  = volumeInfo.getString("title");
+                Book book = new Book(author, title);
                 Log.d(LOG_TAG, "extractFeatureFromJson " + book.toString());
                 bookList.add(book);
 

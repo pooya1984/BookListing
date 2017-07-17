@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -29,12 +29,11 @@ public class BookListAdapter extends ArrayAdapter<Book> {
         }
 
         Book currentBook = getItem(position);
+        TextView primaryBookTitleView = (TextView) listItemView.findViewById(R.id.title_view);
+        primaryBookTitleView.setText(currentBook.getBookTitle());
 
-
-        EditText primaryBookView = (EditText) listItemView.findViewById(R.id.text_edit);
-
-
-        primaryBookView.setText(currentBook.getBookTitle());
+        TextView primaryBookAutorView = (TextView) listItemView.findViewById(R.id.author_view);
+        primaryBookAutorView.setText(currentBook.getBookAuthor());
 
 
 
