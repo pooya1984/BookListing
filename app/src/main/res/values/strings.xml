@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Book Listing</string>
     <string name="emptyList">emptyList</string>
+    <string name="no_books">Books is not Exist</string>
+    <string name="info_no_books">No books found because of Internet connection.</string>
+    <string name="no_connection">no Internet Connection</string>
+
+
 </resources>

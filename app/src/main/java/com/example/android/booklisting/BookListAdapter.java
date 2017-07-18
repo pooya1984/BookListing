@@ -11,6 +11,7 @@ import java.util.List;
 
 
 public class BookListAdapter extends ArrayAdapter<Book> {
+    private static final String LOG_TAG = BookListAdapter.class.getName();
 
 
 
