@@ -95,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         View loadingIndicator = findViewById(R.id.progress_indicator);
         loadingIndicator.setVisibility(View.GONE);
+        mEmptyBookListTextView.setText(R.string.no_books);
+
         adapter.clear();
 
         if (books != null && !books.isEmpty()) {

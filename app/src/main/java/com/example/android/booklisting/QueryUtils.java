@@ -35,8 +35,6 @@ class QueryUtils {
 
     public static List<Book> fetchBookData(String requestUrl) {
 
-        Log.i(LOG_TAG, "Test: fetchBookData() called...");
-
         URL url = createUrl(requestUrl);
         String jsonResponse = null;
 
@@ -99,7 +97,6 @@ class QueryUtils {
         return jsonResponse;
     }
 
-
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -116,8 +113,8 @@ class QueryUtils {
         return output.toString();
     }
 
-    private static List<Book> extractFeatureFromJson(String bookJSON) {
 
+    private static List<Book> extractFeatureFromJson(String bookJSON) {
         if (TextUtils.isEmpty(bookJSON)) {
             return null;
         }
@@ -141,7 +138,6 @@ class QueryUtils {
                 }
                 String title1  = volumeInfo.getString("title");
                 Book book = new Book(author, title);
-                Log.d(LOG_TAG, "extractFeatureFromJson " + book.toString());
                 bookList.add(book);
 
             }
